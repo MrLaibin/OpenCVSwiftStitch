@@ -50,7 +50,17 @@
     NSLog (@"stitching...");
     cv::Mat stitchedMat = stitch (matImages);
     UIImage* result =  [UIImage imageWithCVMat:stitchedMat];
+    
     return result;
+}
++(UIImage*)test{
+    UIImage* win = [UIImage imageNamed:@"win"];
+    cv::Mat matImage = [win CVMat3];
+    cv::Mat imag =image(matImage);
+    UIImage* result =  [UIImage imageWithCVMat:imag];
+    
+    return result;
+    
 }
 
 

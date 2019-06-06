@@ -62,7 +62,7 @@
 
 //openCV 3.x
 #include "opencv2/stitching.hpp"
-
+#include "opencv2/imgproc.hpp"
 
 using namespace std;
 using namespace cv;
@@ -79,8 +79,10 @@ cv::Mat stitch (vector<Mat>& images)
     imgs = images;
     Mat pano;
     Stitcher stitcher = Stitcher::createDefault(try_use_gpu);
+    stitcher.setWarper(new SphericalWarper());
+//    stitcher.setFeaturesFinder(new detail::SurfFeaturesFinder());
+//    stitcher.setFeaturesMatcher(new detail::BestOf2NearestMatcher(false, 0.7f));
     Stitcher::Status status = stitcher.stitch(imgs, pano);
-    
     if (status != Stitcher::OK)
         {
         cout << "Can't stitch images, error code = " << int(status) << endl;
@@ -89,6 +91,21 @@ cv::Mat stitch (vector<Mat>& images)
     return pano;
 }
 
+cv::Mat image(Mat image){
+    Mat grayImage,edge;
+    //转换为灰度图
+    cvtColor(image, grayImage, COLOR_BGR2GRAY);
+//    Mat img = imread("C:\MyPic.jpg",CV_LOAD_IMAGE_GRAYSCALE);
+    IplImage tmp=grayImage;
+//    cvErode(&tmp, &tmp, 0, 2);
+    cvThreshold(tmp, edge, 1, 255, THRESH_BINARY);
+    
+    //降噪
+//    blur(grayImage, edge, Size(3,3));
+//    //运行Canny算子，3为threshold1，9为threshold2
+//    Canny(edge, edge, 3, 9);
+    return edge;
+}
 //// DEPRECATED CODE //////
 /*
  the code below this line is unused.

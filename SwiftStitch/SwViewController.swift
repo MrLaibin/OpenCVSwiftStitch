@@ -43,14 +43,13 @@ class SwViewController: UIViewController, UIScrollViewDelegate {
     func stitch() {
         self.spinner.startAnimating()
         DispatchQueue.global().async {
-            
+//            sleep(3000)
             let image1 = UIImage(named:"pano_19_16_mid.jpg")
             let image2 = UIImage(named:"pano_19_20_mid.jpg")
             let image3 = UIImage(named:"pano_19_22_mid.jpg")
             let image4 = UIImage(named:"pano_19_25_mid.jpg")
             
             let imageArray:[UIImage?] = [image1,image2,image3,image4]
-            
             let stitchedImage:UIImage = CVWrapper.process(with: imageArray as! [UIImage]) as UIImage
             
             DispatchQueue.main.async {

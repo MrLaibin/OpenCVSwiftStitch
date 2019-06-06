@@ -12,5 +12,5 @@
 
 cv::Mat stitch (std::vector <cv::Mat> & images);
 
-
+cv::Mat image(cv::Mat image);
 #endif

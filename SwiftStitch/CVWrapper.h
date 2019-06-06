@@ -17,6 +17,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (UIImage*) processWithArray:(NSArray<UIImage*>*)imageArray;
 
-
++(UIImage*)test;
 @end
 NS_ASSUME_NONNULL_END
